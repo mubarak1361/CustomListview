@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,10 +25,11 @@ import com.mypack.dynamiclistview.adapter.Item;
 import com.mypack.dynamiclistview.adapter.Main;
 import com.mypack.dynamiclistview.adapter.MyListAdapter;
 import com.mypack.dynamiclistview.adapter.User;
+import com.ptr.folding.FoldingDrawerLayout;
 
 public class MainActivity extends SherlockActivity implements OnItemClickListener,OnClickListener {
 	
-	private DrawerLayout mDrawerLayout;
+	private FoldingDrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private CharSequence mDrawerTitle;
@@ -44,7 +45,7 @@ public class MainActivity extends SherlockActivity implements OnItemClickListene
 		LayoutInflater i = LayoutInflater.from(this);
 	     List<Item> items = new ArrayList<Item>();
 		mTitle = mDrawerTitle = "Drawer Example";
-		mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer);
+		mDrawerLayout = (FoldingDrawerLayout)findViewById(R.id.drawer);
 		mDrawerList = (ListView)findViewById(android.R.id.list);
 		items.add(new User(i));
 		items.add(new Main(i));
@@ -67,14 +68,17 @@ public class MainActivity extends SherlockActivity implements OnItemClickListene
 				R.drawable.ic_drawer, 
 				R.string.app_name, 
 				R.string.app_name){
+			
 			public void onDrawerClosed(View v){
 				getSupportActionBar().setTitle(mTitle);
 				supportInvalidateOptionsMenu();
 			}
+			
 			public void onDrawerOpened(View v){
 				getSupportActionBar().setTitle(mDrawerTitle);
 				supportInvalidateOptionsMenu();
 			}
+			
 		};
 		
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -85,7 +89,7 @@ public class MainActivity extends SherlockActivity implements OnItemClickListene
 
     }
     
-private class DrawerItemClickListener implements ListView.OnItemClickListener{
+    private class DrawerItemClickListener implements ListView.OnItemClickListener{
 		
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -95,8 +99,10 @@ private class DrawerItemClickListener implements ListView.OnItemClickListener{
 		
 	}
 
-@Override
-public boolean onOptionsItemSelected(MenuItem item) {
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
     if (item.getItemId() == android.R.id.home) {
 
@@ -105,26 +111,34 @@ public boolean onOptionsItemSelected(MenuItem item) {
         } else {
             mDrawerLayout.openDrawer(mDrawerList);
         }
+        
     }
 
     return super.onOptionsItemSelected(item);
-}
+    }
 
-@Override
-protected void onPostCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
     // Sync the toggle state after onRestoreInstanceState has occurred.
     mDrawerToggle.syncState();
-}
+    }
 
-@Override
-public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+    @Override
+    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 	// TODO Auto-generated method stub
 	
-}
+    }
 
-@Override
-public void onClick(View v) {
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+	super.onConfigurationChanged(newConfig);
+	// Pass any configuration change to the drawer toggls
+	mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onClick(View v) {
 	// TODO Auto-generated method stub
 	switch (v.getId()) {
 	case R.id.search:
@@ -135,6 +149,5 @@ public void onClick(View v) {
 		break;
 	}
 }
-
 
 }

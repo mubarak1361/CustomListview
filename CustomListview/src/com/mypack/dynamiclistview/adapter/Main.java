@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.mypack.dynamiclistview.R;
 import com.mypack.dynamiclistview.adapter.MyListAdapter.RowType;
@@ -31,13 +30,15 @@ public class Main implements Item {
             convertView = (View) inflater.inflate(R.layout.search, null);
         }
         Button search = (Button) convertView.findViewById(R.id.search);
-        EditText searchText =(EditText)convertView.findViewById(R.id.searchedit);
-        final String text =searchText.getText().toString();;
+         EditText searchText =(EditText)convertView.findViewById(R.id.searchedit);
+        
         search.setTag(position);
         search.setOnClickListener(new OnClickListener() {
-        @Override
+        private String string;
+
+		@Override
         public void onClick(View arg0) {
-        	
+       
         }});
 
         return convertView;
