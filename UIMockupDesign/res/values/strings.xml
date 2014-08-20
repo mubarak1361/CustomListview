@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">UIMockupDesign</string>
+    <string name="hello_world">Hello world!</string>
+    <string  name="backbtn">Back</string>
+    <string name="contackbtn">Contact</string>
+    <string name="frndscount">73 Friends</string>
+    <string name="stats">Stats</string>
+    <string name="photos">53 Photos</string>
+    <string name="tips">133 Tips</string>
+    <string name="badge">110 Badges</string>
+    <string name="lists">11 Lists</string>
+    <string name="username">Oz Lubling</string>
+    <string name="addr">Bookyln, NY</string>
+    <string name="checkin">3,826 Check-ins</string>
+    <string name="dot">.</string>
+    <string name="member">Product Strategy, Design User Experience</string>
+    <string name="off">Off</string>
+    <string name="frnd">Friends</string>
+
+</resources>
